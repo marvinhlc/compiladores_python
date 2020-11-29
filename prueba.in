@@ -1,15 +1,25 @@
-let (int n1, int n2, int n4) in
-{
-	int n3;
-	n3 = 6;
-	print n3;
-	let (string b1) in 
-	{
-		b1=2;
-		print b1;
-		int n3;
-		n3 = 8;
-		print n3;
-	} end
-	n3=10;
-} end
+numero = 1;
+
+def sumar(n1,n2):
+    return n1+n2;
+
+def restar(n1,n2):
+    return n1-n2;
+
+def multiplicar(n1,n2):
+    return n1*n2;
+
+def dividir(n1,n2):
+    return n1/n2;
+    
+if numero > 5 :
+    print "numero es 5"
+else:
+    print "no es 5"
+    
+n1 = 1;
+n2 = 5;
+n3 = sumar(n1,n2);
+print(n3);
+n4 = multiplicar(n3,2);
+print n4;
