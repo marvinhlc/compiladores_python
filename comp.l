@@ -8,23 +8,13 @@ simbolo *t;
 %%
 "print"		{return PRINT;}
 "def"		{entrarBloque();return DEF;} 
-"let"		{entrarBloque();return LET;} 
-"in"		{return IN;} 
-"end"		{salirBloque();return END;} 
+"if"		{entrarBloque();return IF;}
+"else"		{entrarBloque();return ELSE;}
+"exit"		{return EXIT_COMMAND;}
+[a-z]		{yylval = *yytext - 'a'; return ID;}
+[0-9]		{yylval = aoti(yytext); return INTEGER;}
 
-[0-9]+		{
-		yylval.numero = atoi(yytext);
-		return NUMERO;
-		}
-[-+()=/*,]	{ return *yytext; }	/* operadores */ 
-[:] 		{ return *yytext; }	/* inicio de bloque */ 
-[;] 		{ return *yytext; }	/* fin de bloque */ 
-[a-zA-Z][a-zA-Z0-9]*	{				
-				yylval.ptr_simbolo=(simbolo *) malloc(sizeof(simbolo));
-				strcpy(yylval.ptr_simbolo->nombre,yytext); 
-				yylval.ptr_simbolo->scope=level;				     
-				return ID;
-			}
+[-+()=/*:;]	{ return *yytext; }	/* operadores */ 
 [ \t]       	; /* espacios en blanco */
 [\n]		{yylineno++;}
 .		yyerror("caracter no valido");
