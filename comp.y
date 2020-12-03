@@ -5,7 +5,7 @@ int yylex(void);
 int sym[26];
 %}
 %start line		
-%token PRINT DEF EXIT_COMMAND INTEGER IF
+%token PRINT DEF EXIT_COMMAND INTEGER IF ELSE ID
 %left '+' '-'
 %left '*' '/'
 %%
@@ -17,13 +17,14 @@ line:
 statement:
 	expr				{printf("%d\n",$1);}
 	| ID '=' expr		{sym[$1] = $3;}
-	! PRINT expr		{printf("%d\n", $2);}
+	| PRINT expr		{printf("%d\n", $2);}
 	| IF expr ':' optional		{sym[$1] = $2;}
 	| EXIT_COMMAND		{exit(EXIT_COMMAND);}
 	;
 
 optional:
-	: ELSE ':' expr			{sym[$1] = $3;}
+	| ELSE ':' expr			{sym[$1] = $3;}
+	;
 
 expr:
 	INTEGER
@@ -41,4 +42,12 @@ void yyerror(char *s){
 	extern char *yytext;	//predefinida en lex.c
 	printf("Error: %s en simbolo \"%s\" en linea %d \n",s,yytext,yylineno);
 	exit(1);
+}
+void main()
+{ 
+	t = crear();
+	yyparse();
+	//eliminarBloque(&t);
+	//eliminarBloque(&t);
+	imprimir(t);
 }
