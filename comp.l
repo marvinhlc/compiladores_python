@@ -7,7 +7,7 @@ int yylineno = 1;
 %}
 %%
 "print"		{return PRINT;}
-"def"		{entrarBloque();return DEF;} 
+"def"		{return DEF;} 
 "if"		{entrarBloque();return IF;}
 "else"		{entrarBloque();return ELSE;}
 "exit"		{return EXIT_COMMAND;}
